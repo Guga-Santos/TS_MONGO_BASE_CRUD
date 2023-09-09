@@ -24,3 +24,5 @@ class ExampleService implements IService<IExample> {
     throw new Error("Method not implemented.");
   }
 }
+
+export default ExampleService;
