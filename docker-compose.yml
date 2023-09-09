@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  node: 
+    image: node:18.15
+    container_name: nome_do_container
+    build: ./
+    tty: true
+    stdin_open: true
+    command: bash
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongodb
+    ports:
+      - 3001:3001
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/nome_do_container
+  
+  mongodb:
+    image: mongo:5.0.7
+    container_name: nome_do_container_DB
+    volumes:
+      - ./:/app
+    restart: always
+    ports:
+      - 27017:27017
+
+networks:
+  default:
+    name: nome_do_container_NET
+
+    # As chaves `tty`, `stdin_open` e `command` fazem com que o container fique
+# rodando em segundo plano, bem como tornam possível o uso do comando
+# `docker attach`, já deixando o terminal atual acoplado ao container, direto
+# no bash. Apesar disso, utilizar o attach mais de uma vez irá replicar o
+# terminal, portanto é melhor utilizar o comando `docker exec`.
+
+# A renomeação da rede padrão é feita pois caso contrário o nome da rede será
+# o nome do diretório onde o arquivo atual se encontra, o que pode dificultar
+# a listagem individual.
