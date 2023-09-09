@@ -1,0 +1,1 @@
+## CRUD base para API node, ts e mongo.
