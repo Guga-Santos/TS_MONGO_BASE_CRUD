@@ -7,7 +7,7 @@
     "dev": "tsnd src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docker-build": "docker-compose up --build",
-    "docker-run": "docker exec -it selos_app sh"
+    "docker-run": "docker exec -it nome_do_container sh"
   },
   "keywords": [],
   "author": "",
